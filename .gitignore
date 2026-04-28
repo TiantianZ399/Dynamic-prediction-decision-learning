@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.venv/
+venv/
+.env
+.ipynb_checkpoints/
+
+# outputs and logs
+outputs/
+logs/
+checkpoints/
+wandb/
+mlruns/
+*.tmp
+
+# proprietary/raw market data
+/data/raw/
+/data/wind/
+/data/*.csv
+!/examples/*.csv
+
+# OS/editor
+.DS_Store
+.vscode/
+.idea/

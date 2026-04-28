@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+title: "Dynamic Prediction--Decision Portfolio Optimization"
+message: "If you use this repository, please cite the associated preliminary paper or this repository."
+type: software
+authors:
+  - family-names: Zhang
+    given-names: Tiantian
+    email: t.zhang8@columbia.edu
+version: 0.1.0
+date-released: 2026-04-28
+repository-code: "https://github.com/<your-github-username>/dynamic-portfolio-rl"
+abstract: "Preliminary research code for deep prediction layers and reinforcement-learning decision layers in dynamic portfolio optimization."
