@@ -1,8 +1,8 @@
 # Dynamic Prediction--Decision Portfolio Optimization
 
-This is repo implements the prediction and decision methodology purposed in arxiv link pending and developed from internship during boke technology.
+🪄 This is repo implements the prediction and decision methodology purposed in arxiv link pending and developed from internship during boke technology. 🔮
 
-# 
+You can see the arxiv paper in the paper section: .
 
 This repository contains a preliminary research codebase for **dynamic portfolio optimization with a separated prediction layer and decision layer**. The project studies whether portfolio learning should be implemented as:
 
