@@ -1,6 +1,6 @@
 # Dynamic Prediction--Decision Portfolio Optimization
 
-This is repo implements the prediction and decision methodology purposed in arxiv link pending and developer from internship during boke technology.
+This is repo implements the prediction and decision methodology purposed in arxiv link pending and developed from internship during boke technology.
 
 # 
 
