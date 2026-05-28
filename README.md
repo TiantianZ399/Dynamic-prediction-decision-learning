@@ -4,7 +4,7 @@
 
 You can see the arxiv paper in the paper section: [paper/Dynamic_Prediction_Decision_Learning.pdf](https://github.com/TiantianZ399/Dynamic-prediction-decision-learning/blob/main/paper/Dynamic_Prediction_Decision_Learning.pdf)
 
-You can find my internship report under the docs
+You can find my internship report under the [doc](https://github.com/TiantianZ399/Dynamic-prediction-decision-learning/tree/main/docs)
 
 
 This repository contains a preliminary research codebase for **dynamic portfolio optimization with a separated prediction layer and decision layer**. The project studies whether portfolio learning should be implemented as:
