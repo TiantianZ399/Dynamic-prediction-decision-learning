@@ -8,7 +8,9 @@ Use ``smoke`` for the three-roll interface check or ``full`` for the complete
 
 from __future__ import annotations
 
+import json
 import runpy
+import subprocess
 import sys
 from pathlib import Path
 
@@ -22,6 +24,23 @@ if mode not in {"smoke", "full"}:
 
 max_rolls = "3" if mode == "smoke" else "-1"
 out_dir = ROOT / "outputs" / f"public_original_7_{mode}"
+
+# The data notebook is responsible for the full provenance manifest.  Record
+# the exact checkout used by this launcher immediately before training so a
+# Colab result cannot be mistaken for a locally executed result.
+manifest_path = ROOT / "data" / "etfs_original_7_20080102_20241231_manifest.json"
+commit_sha = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
+manifest = json.loads(manifest_path.read_text())
+manifest["repository"] = {
+    "url": "https://github.com/TiantianZ399/Dynamic-prediction-decision-learning.git",
+    "branch": "codex/public-yahoo-replication",
+    "commit_sha": commit_sha,
+}
+manifest["experiment_code_commit_sha"] = commit_sha
+manifest_path.write_text(json.dumps(manifest, indent=2) + "\n")
+out_dir.mkdir(parents=True, exist_ok=True)
+(out_dir / "code_version.json").write_text(json.dumps({"commit_sha": commit_sha}, indent=2) + "\n")
+
 sys.argv = [
     str(ROOT / "scripts" / "run_full_oos_fair_eval.py"),
     "--data_path", str(ROOT / "data" / "etfs_aligned_returns_wide.csv"),
