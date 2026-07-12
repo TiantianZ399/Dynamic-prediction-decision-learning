@@ -1,0 +1,45 @@
+#!/usr/bin/env python3
+"""Run the documented Yahoo public-data OOS experiment in Colab.
+
+This small launcher avoids retyping the long command in a browser terminal.
+Use ``smoke`` for the three-roll interface check or ``full`` for the complete
+2019--2024 evaluation.
+"""
+
+from __future__ import annotations
+
+import runpy
+import sys
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+
+mode = sys.argv[1] if len(sys.argv) == 2 else "full"
+if mode not in {"smoke", "full"}:
+    raise SystemExit("Usage: python scripts/runpublic [smoke|full]")
+
+max_rolls = "3" if mode == "smoke" else "-1"
+out_dir = ROOT / "outputs" / f"public_original_7_{mode}"
+sys.argv = [
+    str(ROOT / "scripts" / "run_full_oos_fair_eval.py"),
+    "--data_path", str(ROOT / "data" / "etfs_aligned_returns_wide.csv"),
+    "--out_dir", str(out_dir),
+    "--start_date", "2019-01-02",
+    "--end_date", "2024-12-31",
+    "--encoder", "cnn_lstm",
+    "--train_len", "250",
+    "--test_len", "20",
+    "--seq_len", "120",
+    "--fqi_iters", "1",
+    "--epochs_per_iter", "1",
+    "--hidden", "16",
+    "--eval_cost", "0.002",
+    "--reward_cost", "0.002",
+    "--risk_coef", "0.25",
+    "--switch_thresholds", "0", "0.1", "0.2",
+    "--max_rolls", max_rolls,
+    "--seed", "2021",
+]
+runpy.run_path(str(ROOT / "scripts" / "run_full_oos_fair_eval.py"), run_name="__main__")
