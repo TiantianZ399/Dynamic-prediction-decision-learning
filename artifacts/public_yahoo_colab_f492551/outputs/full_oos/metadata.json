@@ -1,0 +1,49 @@
+{
+  "assets": [
+    "AGG.P",
+    "DBC.P",
+    "GLD.P",
+    "IWM.P",
+    "LQD.P",
+    "MUB.P",
+    "VTI.P"
+  ],
+  "config": {
+    "start_date": "2019-01-02",
+    "end_date": "2024-12-31",
+    "train_len": 250,
+    "test_len": 20,
+    "warmup": 120,
+    "seq_len": 120,
+    "vol_window": 20,
+    "eval_cost": 0.002,
+    "reward_cost": 0.002,
+    "risk_coef": 0.25,
+    "gamma": 0.95,
+    "fqi_iters": 1,
+    "epochs_per_iter": 1,
+    "batch_size": 512,
+    "lr": 0.002,
+    "weight_decay": 0.0001,
+    "q_scale": 100.0,
+    "pred_loss_weight": 0.05,
+    "cql_alpha": 0.05,
+    "hidden": 16,
+    "dropout": 0.1,
+    "encoder": "cnn_lstm",
+    "kernel_size": 5,
+    "lstm_layers": 1,
+    "max_rolls": null,
+    "switch_thresholds": [
+      0.0,
+      0.1,
+      0.2
+    ],
+    "seed": 2021,
+    "torch_num_threads": 1
+  },
+  "n_rolls": 75,
+  "covered_oos_start": "2019-01-03",
+  "covered_oos_end": "2024-12-17",
+  "elapsed_sec": 107.30278301239014
+}

@@ -1,0 +1,4 @@
+method,hold_prev,equal_weight,inverse_vol,inverse_var,bond_basket,equity_basket,gold,commodity,top2_momentum,top3_momentum,soft_momentum
+cnn_lstm_cql_thr0,361,74,122,160,63,100,112,101,84,141,182
+cnn_lstm_cql_thr0.1,604,79,98,111,41,67,100,58,70,127,145
+cnn_lstm_cql_thr0.2,991,47,46,72,20,12,64,5,54,71,118
