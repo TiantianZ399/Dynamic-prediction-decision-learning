@@ -1,0 +1,103 @@
+{
+  "alignment": {
+    "common_end": "2024-12-31",
+    "common_start": "2008-01-02",
+    "rows_after_intersection_alignment": 4279,
+    "rows_dropped_for_partial_missingness": 0,
+    "rows_in_common_window_before_drop": 4279
+  },
+  "download_started_at_utc": "2026-07-12T18:28:04.763453+00:00",
+  "environment": {
+    "numpy": "2.0.2",
+    "pandas": "2.2.2",
+    "platform": "Linux-6.6.122+-x86_64-with-glibc2.35",
+    "python": "3.12.13",
+    "yfinance": "1.5.1"
+  },
+  "files": {
+    "etfs_aligned_returns_wide.csv": {
+      "bytes": 561579,
+      "sha256": "ef76413803ec597c4ff8971fbcb995d777974c50a9d2c9075cb98c6edde7c69a"
+    },
+    "etfs_original_7_20080102_20241231_README.txt": {
+      "bytes": 871,
+      "sha256": "ec16a68d372149dd799371b459a3dd080e6a9c9f05a69beac4f0fe5c2962daee"
+    },
+    "etfs_original_7_20080102_20241231_adjusted_prices_long.csv": {
+      "bytes": 923893,
+      "sha256": "e08aa52ff390eedfb6b3fa5eb489df521c44529c28dd74ffe61bf6912e71b723"
+    },
+    "etfs_original_7_20080102_20241231_adjusted_prices_wide.csv": {
+      "bytes": 461793,
+      "sha256": "c50310b6bed1458d5150e6d7e88e73e54e59f461da67c4501189be0385785f97"
+    },
+    "etfs_original_7_20080102_20241231_asset_statistics.csv": {
+      "bytes": 1024,
+      "sha256": "9601599e5f26d7dcc5fe51891e87348fed53b3463b1869844a011acb9c26edba"
+    },
+    "etfs_original_7_20080102_20241231_data_quality.csv": {
+      "bytes": 723,
+      "sha256": "c687ed551499cdaca42a3ab09b089a85ed30a949029a2b30fe18c42511932c1d"
+    },
+    "etfs_original_7_20080102_20241231_returns_wide.csv": {
+      "bytes": 561579,
+      "sha256": "ef76413803ec597c4ff8971fbcb995d777974c50a9d2c9075cb98c6edde7c69a"
+    },
+    "etfs_original_7_20080102_20241231_ticker_map.csv": {
+      "bytes": 94,
+      "sha256": "1f2f081b2448823a42d5a28e73727da1b2ccb7fea240125fe01d342015c8c61f"
+    }
+  },
+  "generated_at_utc": "2026-07-12T18:28:15.882072+00:00",
+  "processing": {
+    "alignment": "intersection after restricting to common first/last valid dates",
+    "price_field": "adjusted Close",
+    "price_imputation": "none",
+    "return_definition": "simple close-to-close return: P_t / P_(t-1) - 1",
+    "return_imputation": "none",
+    "trading_days_per_year_for_descriptive_statistics": 252
+  },
+  "query": {
+    "actions": false,
+    "auto_adjust": true,
+    "interval": "1d",
+    "repair": true,
+    "request_end_sent_to_yfinance_exclusive": "2025-01-01",
+    "requested_end_date_inclusive": "2024-12-31",
+    "requested_start_date_inclusive": "2008-01-02"
+  },
+  "repository": {
+    "url": "https://github.com/TiantianZ399/Dynamic-prediction-decision-learning.git",
+    "branch": "codex/public-yahoo-replication",
+    "commit_sha": "f49255135ad7e782c6d600a092330474ee5ff545"
+  },
+  "result": {
+    "asset_count": 7,
+    "maximum_absolute_daily_return": 0.13266929625625845,
+    "price_rows": 4279,
+    "return_end_date": "2024-12-31",
+    "return_rows": 4278,
+    "return_start_date": "2008-01-03"
+  },
+  "schema_version": "1.0",
+  "source": {
+    "client": "yfinance",
+    "client_version": "1.5.1",
+    "provider": "Yahoo Finance",
+    "usage_note": "Research/educational use; consult provider terms."
+  },
+  "universe": {
+    "asset_count": 7,
+    "key": "original_7",
+    "ric_to_yahoo": {
+      "AGG.P": "AGG",
+      "DBC.P": "DBC",
+      "GLD.P": "GLD",
+      "IWM.P": "IWM",
+      "LQD.P": "LQD",
+      "MUB.P": "MUB",
+      "VTI.P": "VTI"
+    }
+  },
+  "experiment_code_commit_sha": "f49255135ad7e782c6d600a092330474ee5ff545"
+}

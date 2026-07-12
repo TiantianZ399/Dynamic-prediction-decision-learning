@@ -10,22 +10,15 @@ This is a public-data replication of the seven-ETF full OOS diagnostic, not a re
 - Model: CNN-LSTM Conservative FQI proxy; 250-day train lookback, 120-day state sequence, 20-day test block, one FQI iteration, one epoch per iteration, hidden size 16, seed 2021.
 - Costs: 20 basis points times L1 turnover in both reward and evaluation.
 
-The data manifest is `data/etfs_original_7_20080102_20241231_manifest.json` (SHA-256 `8e0d5e33084be4e5ea99d1602bd2f7971e66eb9be711b51a84589f45c228bbe9`). The complete public-data bundle is `public_etf_data_original_7_20080102_20241231.zip` (SHA-256 `f37a8102c04fc0e9511e4d391e1a473a167f3417bd6d7b41a0a9c1c46ef9bf71`).
+The Colab-generated manifest is committed at `artifacts/public_yahoo_colab_f492551/etfs_original_7_20080102_20241231_manifest.json`. It records the exact experiment checkout as `f49255135ad7e782c6d600a092330474ee5ff545` on `codex/public-yahoo-replication`; `outputs/full_oos/code_version.json` records the same SHA. The executed notebook is `notebooks/01_download_public_etf_data_colab.executed.ipynb`.
 
-The result was run with the complete local replication package, which includes `scripts/run_full_oos_fair_eval.py`. At the time of verification, the public GitHub `main` commit `05dad79b89c770802162144f9baff1bdc5983837` did not include that runner. Therefore, Colab users must use the complete replication package or first merge the full-OOS runner into the public repository; the notebook intentionally stops after its smoke command when the cloned checkout lacks the runner.
+The full OOS result was run in Colab from that GitHub checkout, following the completed three-roll smoke test. The source notebook deliberately exports and validates the data before printing experiment commands; `scripts/runpublic` provides the corresponding smoke/full launcher and writes the code version into both the manifest and full-output directory.
 
 ## Command
 
 ```bash
-export PYTHONPATH=src:.
-.venv/bin/python scripts/run_full_oos_fair_eval.py \
-  --data_path data/etfs_aligned_returns_wide.csv \
-  --out_dir outputs/full_oos_original_7 \
-  --start_date 2019-01-02 --end_date 2024-12-31 \
-  --encoder cnn_lstm --train_len 250 --test_len 20 --seq_len 120 \
-  --fqi_iters 1 --epochs_per_iter 1 --hidden 16 \
-  --eval_cost 0.002 --reward_cost 0.002 --risk_coef 0.25 \
-  --switch_thresholds 0 0.1 0.2 --max_rolls -1 --seed 2021
+python scripts/runpublic smoke
+python scripts/runpublic full
 ```
 
 ## Aggregate performance
@@ -50,11 +43,11 @@ The outputs contain no multi-seed uncertainty interval or cost sensitivity analy
 
 ## Figure and output provenance
 
-Run the following after the OOS command to generate editable SVG/PDF, 600 dpi TIFF, and PNG preview files from the same daily curves:
+The committed Colab result summary files are in `artifacts/public_yahoo_colab_f492551/outputs/full_oos/`. Run the following after the OOS command to generate editable SVG/PDF, 600 dpi TIFF, and PNG preview files from the same daily curves:
 
 ```bash
-.venv/bin/python scripts/plot_full_oos_results.py \
-  --results-dir outputs/full_oos_original_7
+python scripts/plot_full_oos_results.py \
+  --results-dir outputs/public_original_7_full
 ```
 
-The source curves and summary tables are in `outputs/full_oos_original_7/`; the figure is written under `outputs/full_oos_original_7/figures/`.
+The source curves and summary tables are in `outputs/public_original_7_full/`; the figure is written under `outputs/public_original_7_full/figures/`.
