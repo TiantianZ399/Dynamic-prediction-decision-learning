@@ -1,11 +1,4 @@
-# 🔮 Dynamic Prediction--Decision Portfolio Optimization
-
-🪄 This is repo implements the prediction and decision methodology purposed in arxiv link pending and developed from internship during boke technology. 
-
-You can see the arxiv paper in the paper section: [paper/Dynamic_Prediction_Decision_Learning.pdf](https://github.com/TiantianZ399/Dynamic-prediction-decision-learning/blob/main/paper/Dynamic_Prediction_Decision_Learning.pdf)
-
-You can find my internship report under the [doc](https://github.com/TiantianZ399/Dynamic-prediction-decision-learning/tree/main/docs)
-
+# Dynamic Prediction--Decision Portfolio Optimization
 
 This repository contains a preliminary research codebase for **dynamic portfolio optimization with a separated prediction layer and decision layer**. The project studies whether portfolio learning should be implemented as:
 
@@ -99,6 +92,38 @@ python scripts/run_deep_cql_fqi.py \
   --risk_coef 0.25
 ```
 
+
+## Deep temporal encoder upgrade
+
+The repository now includes a temporal deep-learning version of the conservative CQL-FQI decision layer:
+
+```bash
+python scripts/run_deep_temporal_cql_fqi.py \
+  --data_path data/etfs_aligned_returns_wide.csv \
+  --out_dir outputs/deep_temporal_cql_7etf \
+  --encoder cnn_lstm \
+  --start_date 2019-01-02 \
+  --end_date 2024-12-31 \
+  --train_len 250 \
+  --test_len 20 \
+  --seq_len 120 \
+  --max_rolls 12 \
+  --hidden 16 \
+  --fqi_iters 1 \
+  --epochs_per_iter 1 \
+  --switch_thresholds 0.0 0.10 0.20
+```
+
+Supported encoders:
+
+```text
+--encoder mlp       # flattened 120-day history baseline
+--encoder tcn       # causal temporal convolution network
+--encoder cnn_lstm  # convolutional feature extractor followed by LSTM
+```
+
+The current recommended temporal encoder for the seven-ETF diagnostic is `cnn_lstm`. It performed best among the fast temporal encoder tests, although equal weight remains the strongest benchmark in the short 12-roll diagnostic.
+
 ## Repository layout
 
 ```text
@@ -133,3 +158,40 @@ Recent DRL portfolio work formulates portfolio selection as a Markov decision pr
 ## Disclaimer
 
 This repository is for academic research only. It is not investment advice, not a trading recommendation, and not a production-ready portfolio system.
+
+## Full OOS fair equal-weight evaluation
+
+This release includes a full 2019--2024 OOS diagnostic with fair equal-weight variants and active-return metrics. See:
+
+- `docs/full_oos_fair_eval_report.md`
+- `outputs/full_oos_fair_eval/aggregate_results_full_oos.csv`
+- `outputs/full_oos_fair_eval/active_metrics_vs_equal_weight.csv`
+
+Run:
+
+```bash
+export PYTHONPATH=src:.
+python scripts/run_full_oos_fair_eval.py \
+  --data_path data/etfs_aligned_returns_wide.csv \
+  --out_dir outputs/full_oos_fair_eval \
+  --encoder cnn_lstm \
+  --start_date 2019-01-02 \
+  --end_date 2024-12-31 \
+  --train_len 250 \
+  --test_len 20 \
+  --seq_len 120 \
+  --fqi_iters 1 \
+  --epochs_per_iter 1 \
+  --hidden 16 \
+  --switch_thresholds 0 0.1 0.2
+```
+
+### Yahoo public-data replication
+
+Use [`notebooks/01_download_public_etf_data_colab.ipynb`](notebooks/01_download_public_etf_data_colab.ipynb) in Colab to download the seven-ETF Yahoo Finance panel and create `data/etfs_aligned_returns_wide.csv`. The notebook records the checkout commit, data provenance, and hashes, then prints a three-roll smoke command and, when available, the full 2019--2024 OOS command. See [`docs/PUBLIC_DATA_COLAB.md`](docs/PUBLIC_DATA_COLAB.md) for the required run order and reporting constraints.
+
+The completed Yahoo public-data replication is documented in [`docs/public_yahoo_oos_report.md`](docs/public_yahoo_oos_report.md). Regenerate its figure from the evaluated daily curves with:
+
+```bash
+python scripts/plot_full_oos_results.py --results-dir outputs/full_oos_original_7
+```
